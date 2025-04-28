@@ -8,5 +8,13 @@ RSpec.describe Calculator do
 		it "contains empty value in it" do
 			expect(calculator.add("")).to eq(0)
 		end
+		
+		it "contains one number" do
+	    expect(calculator.add("1")).to eq(1)
+		end
+
+		it "contains two numbers comma separated" do
+	    expect(calculator.add("1,5")).to eq(6)
+		end
 	end
 end
