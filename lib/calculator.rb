@@ -11,7 +11,7 @@ class Calculator
       if delimiter_input.scan(/\[(.*?)\]/).flatten.empty?
         custom_delimiter =  delimiter_input[2]
       else 
-        custom_delimiter = Regexp.new("[#{delimiter_input.scan(/\[(.*?)\]/).flatten.join('')}]")
+        custom_delimiter = Regexp.union(delimiter_input.scan(/\[(.*?)\]/).flatten)
       end  
       numbers = numbers_input_string.split(custom_delimiter).map(&:to_i)
     else
