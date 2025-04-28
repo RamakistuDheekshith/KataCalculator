@@ -24,5 +24,11 @@ RSpec.describe Calculator do
 		it "handle input with new line chars" do
 			expect(calculator.add("1\n2,3")).to eq(6)
 		end
+
+		["//;\n1;2", "//|\n1|2", "//.\n1.2"].each do |test_input|
+			it "handle input with custom delimiters in format ***//[delimiter]\n[numbers…]***" do
+				expect(calculator.add(test_input)).to eq(3)
+			end
+		end
 	end
 end
