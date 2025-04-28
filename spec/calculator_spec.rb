@@ -16,5 +16,10 @@ RSpec.describe Calculator do
 		it "contains two numbers comma separated" do
 	    expect(calculator.add("1,5")).to eq(6)
 		end
+
+		it "contains multiple numbers" do
+			expect(calculator.add("1, 5, 5, 6, 7, 3")).to eq(27)
+		end
+
 	end
 end
