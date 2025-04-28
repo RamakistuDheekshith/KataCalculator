@@ -8,6 +8,8 @@ class Calculator
     else
       numbers = input_string.split(/[\n,]/).map(&:to_i)
     end
+    negative_numbers = numbers.select { |number| number < 0 }
+    raise ArgumentError, "negative numbers not allowed: #{negative_numbers.join(',')}" if negative_numbers.length > 0
     numbers.sum
   end
 end
