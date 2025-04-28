@@ -8,17 +8,20 @@ class Calculator
       # considering single char delimter when delimter_input is '//delimiter'
       # multi char delimiter when delimiter_input is '//[delimiter]'
       numbers_input_string = input_string.split("\n")[1]
-      if delimiter_input.scan(/\[(.*?)\]/).flatten.empty?
-        custom_delimiter =  delimiter_input[2]
-      else 
-        custom_delimiter = Regexp.union(delimiter_input.scan(/\[(.*?)\]/).flatten)
-      end  
+      custom_delimiter = if delimiter_input.scan(/\[(.*?)\]/).flatten.empty?
+                           delimiter_input[2]
+                         else
+                           Regexp.union(delimiter_input.scan(/\[(.*?)\]/).flatten)
+                         end
       numbers = numbers_input_string.split(custom_delimiter).map(&:to_i)
     else
       numbers = input_string.split(/[\n,]/).map(&:to_i)
     end
-    negative_numbers = numbers.select { |number| number < 0 }
-    raise ArgumentError, "negative numbers not allowed: #{negative_numbers.join(',')}" if negative_numbers.length > 0
+    negative_numbers = numbers.select(&:negative?)
+    if negative_numbers.length.positive?
+      raise ArgumentError,
+            "negative numbers not allowed: #{negative_numbers.join(',')}"
+    end
 
     numbers = numbers.select { |num| num <= 1000 }
     numbers.sum
