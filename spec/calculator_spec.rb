@@ -21,5 +21,8 @@ RSpec.describe Calculator do
 			expect(calculator.add("1, 5, 5, 6, 7, 3")).to eq(27)
 		end
 
+		it "handle input with new line chars" do
+			expect(calculator.add("1\n2,3")).to eq(6)
+		end
 	end
 end
