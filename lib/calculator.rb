@@ -3,7 +3,11 @@ class Calculator
     return 0 if input_string.empty?
 
     if input_string.start_with?('//')
-      custom_delimiter = input_string.split("\n")[0][2]
+      # considering substring before \n from “//[delimiter]\n[numbers…]”
+      delimiter_input = input_string.split("\n")[0]
+      # considering multi char delimiter when delimiter_input is '//[delimiter]'
+      # single char delimter when delimter_input is '//delimiter'
+      custom_delimiter = delimiter_input.scan(/\[(.*?)\]/)[0]? delimiter_input.scan(/\[(.*?)\]/)[0][0] : delimiter_input[2]
       numbers_input_string = input_string.split("\n")[1]
       numbers = numbers_input_string.split(custom_delimiter).map(&:to_i)
     else
