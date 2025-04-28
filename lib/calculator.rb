@@ -12,6 +12,7 @@ class Calculator
     negative_numbers = numbers.select { |number| number < 0 }
     raise ArgumentError, "negative numbers not allowed: #{negative_numbers.join(',')}" if negative_numbers.length > 0
 
+    numbers = numbers.select { |num| num <= 1000 }
     numbers.sum
   end
 end
