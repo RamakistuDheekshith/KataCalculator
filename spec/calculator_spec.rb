@@ -30,5 +30,11 @@ RSpec.describe Calculator do
 				expect(calculator.add(test_input)).to eq(3)
 			end
 		end
+
+		it "handle input with new line chars" do
+			expect(calculator.add("1,-3,2,3")).to raise_error("negative numbers not allowed: -3")
+			expect(calculator.add("-1,-7,4,-9")).to raise_error("negative numbers not allowed: -1,-7,-9")
+			expect(calculator.add("//;\n1;2;-4;-8")).to raise_error("negative numbers not allowed: -4,-8")
+		end
 	end
 end
