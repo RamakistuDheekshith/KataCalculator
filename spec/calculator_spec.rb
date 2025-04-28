@@ -40,5 +40,11 @@ RSpec.describe Calculator do
 		it 'ignore numbers greater than 1000' do
 			expect(calculator.add('1, 1001, 5, 6, 8')).to eq(20)
 		end
+
+		["//[;;]\n1;;2;;3", "//[||]\n1||2||3", "//[***]\n1***2***3"].each do |test_input|
+      it "handle input with multi character custom delimiter in format ***//[delimiter]\n[numbers…]***" do
+        expect(calculator.add(test_input)).to eq(6)
+      end
+    end
   end
 end
