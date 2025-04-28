@@ -47,7 +47,7 @@ RSpec.describe Calculator do
       end
     end
 
-		["//[;][*]\n1;2*3", "//[|][%]\n1|2%3", "//[.][$][\n1.2.$3"].each do |test_input|
+		["//[;][*]\n1;2*3", "//[|][%]\n1|2%3", "//[.][$]\n1.2.$3"].each do |test_input|
       it "handle input with multiple custom delimiters in format ***//[delimiter][delimiter]\n[numbers…]***" do
         expect(calculator.add(test_input)).to eq(6)
       end
